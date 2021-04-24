@@ -13,7 +13,9 @@ export default class Product extends Component {
                 <div className="card">
                 <ProductConsumer>
                     {(value)=>(
-                    <div className="img-container p-5" onClick={()=>value.handleDetail(id)}>
+                    <div className="img-container p-5" onClick={()=>{
+                        value.openModal(id)
+                        value.handleDetail(id)}}>
                     <Link to={`/details/`} >
                     <img src={img} alt={company} className='card-img-top' />
                     </Link>
