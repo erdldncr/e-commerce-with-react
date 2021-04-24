@@ -2,9 +2,10 @@ import React, { Component } from 'react'
 import styled from 'styled-components'
 import {Link} from'react-router-dom'
 import {ProductConsumer} from '../Context'
+import PropTypes from 'prop-types'
 export default class Product extends Component {
     render() {
-        const{company,count,id,img,inCart,info,price,title,total}=this.props
+        const{company,count,id,img,inCart,info,price,title,total}=this.props.product
         return (
             <ProductWrapper className='col-9 mx-auto col-md-6 col-lg-3 my-3'>
                 <div className="card">
@@ -33,6 +34,16 @@ export default class Product extends Component {
     }
 }
 
+Product.propTypes={
+    product:PropTypes.shape({
+        id:PropTypes.number,
+        img:PropTypes.string,
+        title:PropTypes.string,
+        price:PropTypes.number,
+        inCart:PropTypes.bool
+    }).isRequired
+}
+
 const ProductWrapper=styled.div`
 .card{
     border-color:transparent;
@@ -50,5 +61,37 @@ const ProductWrapper=styled.div`
     .card-footer{
         background:rgba(247,247,247);
     }
+}
+.img-container{
+    position:relative;
+    overflow:hidden;
+}
+.card-img-top{
+    transition:all 1s linear;
+}
+.img-container:hover .card-img-top{
+    transform:scale(1.2);
+  
+}
+.card-btn{
+    position:absolute;
+    bottom:0px;
+    right:0px;
+    padding :0.2rem 0.4rem;
+    background:var(--lightBlue);
+    border:none;
+    color:var(--mainWhite);
+    font-size:1.4rem;
+    border-radius:0.5rem 0rem 0rem 0;
+    transform:translate(100%,100%)
+}
+.img-container:hover .card-btn{
+    transition:all 1s linear;
+    transform:translate(0%,0%);
+   
+}
+.card-btn:hover{
+    color: var(--mainBlue);
+    cursor:pointer
 }
 `
