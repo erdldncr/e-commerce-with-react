@@ -14,13 +14,16 @@ export default class Product extends Component {
                 <ProductConsumer>
                     {(value)=>(
                     <div className="img-container p-5" onClick={()=>{
-                        value.openModal(id)
+                       
                         value.handleDetail(id)}}>
                     <Link to={`/details/`} >
                     <img src={img} alt={company} className='card-img-top' />
                     </Link>
                     <button 
-                    onClick={()=>{value.addToCart(id)}} 
+                    onClick={()=>{
+                        value.addToCart(id)
+                        value.openModal(id)
+                    }} 
                     className="card-btn" 
                     disabled={inCart?true:false}>
                         {inCart? 
