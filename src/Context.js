@@ -9,7 +9,10 @@ class ProductProvider extends Component {
     detailProduct,
     cart:[],
     modalOpen:false,
-    modalProduct:detailProduct
+    modalProduct:detailProduct,
+    cartSubTotal:0,
+    cartTax:0,
+    cartTotal:0
     }
     setProducts=()=>{
         let products=[]
@@ -52,6 +55,19 @@ class ProductProvider extends Component {
     closeModal=()=>{
         this.setState({modalOpen:false})
     }
+    increment=(id)=>{
+        console.log('incerement')
+    }
+    decrement=(id)=>{
+        console.log('decrement')
+    }
+    remove=(id)=>{
+        console.log('remove')
+    }
+    clearCart=()=>{
+        this.setState({cart:[]})
+    }
+
     render() {
        
         return (
@@ -61,7 +77,11 @@ class ProductProvider extends Component {
                     handleDetail:this.handleDetail,
                     addToCart:this.addToCart,
                     openModal:this.openModal,
-                    closeModal:this.closeModal
+                    closeModal:this.closeModal,
+                    removeItem:this.remove,
+                    cleartCart:this.clearCart,
+                    increment:this.increment,
+                    decrement:this.decrement
                 
                 }}>
                 {this.props.children}
@@ -70,4 +90,4 @@ class ProductProvider extends Component {
     }
 }
 const ProductConsumer=ProductContext.Consumer;
-export{ProductProvider,ProductConsumer}
+export{ProductProvider,ProductConsumer,ProductContext}
