@@ -45,7 +45,11 @@ class ProductProvider extends Component {
         product.count=1;
         const price=product.price
         product.total=price
-       this.setState({products:tempProducts,cart:[...this.state.cart,product]})
+       this.setState({
+           products:tempProducts,
+           cart:[...this.state.cart,product]
+        })
+       
       
     }
     openModal=id=>{
@@ -56,20 +60,36 @@ class ProductProvider extends Component {
         this.setState({modalOpen:false})
     }
     increment=(id)=>{
-        console.log('incerement')
+        let tempProducts=[...this.state.products];
+       let index=tempProducts.findIndex(el=>el.id===id);
+       let product=tempProducts[index];
+       product.count+=1
+       const price=product.price
+        product.total=price*product.count
+       this.setState({products:tempProducts})
+
     }
     decrement=(id)=>{
-        console.log('decrement')
+        let tempProducts=[...this.state.products];
+        let index=tempProducts.findIndex(el=>el.id===id);
+        let product=tempProducts[index];
+        if(product.id>=0){
+            product.count-=1
+            const price=product.price
+             product.total=price*product.count
+            this.setState({products:tempProducts})
+        }
     }
     remove=(id)=>{
-        console.log('remove')
+        console.log(id)
+        this.setState({cart:this.state.cart.filter(product=>product.id!==id)})
     }
     clearCart=()=>{
         this.setState({cart:[]})
     }
 
     render() {
-       
+      
         return (
             <ProductContext.Provider 
             value={{
@@ -79,7 +99,7 @@ class ProductProvider extends Component {
                     openModal:this.openModal,
                     closeModal:this.closeModal,
                     removeItem:this.remove,
-                    cleartCart:this.clearCart,
+                    clearCart:this.clearCart,
                     increment:this.increment,
                     decrement:this.decrement
                 
